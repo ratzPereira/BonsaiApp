@@ -10,9 +10,8 @@ import java.util.Date;
 public class Bonsai {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer id;
+    private String id;
 
     @Column(name = "name")
     private String name;
@@ -34,7 +33,7 @@ public class Bonsai {
     public Bonsai() {
     }
 
-    public Bonsai(Integer id, String name, String specie, String dateOfCreation, String image, String description) {
+    public Bonsai(String id, String name, String specie, String dateOfCreation, String image, String description) {
         this.id = id;
         this.name = name;
         this.specie = specie;
@@ -43,11 +42,11 @@ public class Bonsai {
         this.description = description;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
