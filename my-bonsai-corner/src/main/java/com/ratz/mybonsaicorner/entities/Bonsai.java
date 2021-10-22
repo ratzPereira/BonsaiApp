@@ -29,18 +29,11 @@ public class Bonsai {
     @Column(name = "description")
     private String description;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
-    public Bonsai() {
-    }
 
-    public Bonsai(String id, String name, String specie, String dateOfCreation, String image, String description) {
-        this.id = id;
-        this.name = name;
-        this.specie = specie;
-        this.dateOfCreation = dateOfCreation;
-        this.image = image;
-        this.description = description;
-    }
 
     public String getId() {
         return id;
@@ -88,5 +81,13 @@ public class Bonsai {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
