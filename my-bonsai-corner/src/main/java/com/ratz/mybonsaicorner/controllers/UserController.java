@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 
 @RestController
@@ -22,7 +23,7 @@ public class UserController {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @PostMapping("/user/new")
-    public ResponseEntity<User> registerUser(@RequestBody User user) {
+    public ResponseEntity<User> registerUser(@Valid @RequestBody User user) {
 
         System.out.println(user.toString());
         String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());

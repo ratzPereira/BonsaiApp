@@ -1,9 +1,12 @@
 package com.ratz.mybonsaicorner.entities;
 
-import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-import java.util.Date;
+
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 
 @Entity
 @Table(name = "bonsai")
@@ -14,9 +17,13 @@ public class Bonsai {
     private String id;
 
     @Column(name = "name")
+    @NotNull(message = "Cant be null")
+    @NotEmpty(message = "Cant be empty")
+    @Size(min = 2, max = 30,message = "Cant be lower than 2 or longer than 30")
     private String name;
 
     @Column(name = "specie")
+    @Size(min = 2, max = 130)
     private String specie;
 
     @Column(name = "date_of_creation")

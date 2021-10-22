@@ -1,10 +1,9 @@
 package com.ratz.mybonsaicorner.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 @Entity
@@ -17,17 +16,22 @@ public class User {
     private Integer id;
 
     @Column(name = "user_name")
+    @Size(min = 2,max = 100, message = "User name must contain 2 letters minimum or 100 maximum ")
     private String userName;
 
     @Column(name = "first_name")
+    @Size(min = 2,max = 100 , message = "First name must contain 2 letters minimum or 100 maximum ")
     private String firstName;
 
     @Column(name = "last_name")
+    @Size(min = 2,max = 100, message = "Last Name must contain 2 letters minimum or 100 maximum ")
     private String lastName;
 
     @Column(name = "email")
+    @Email(message = "Please insert valid email")
     private String email;
 
+    @Size(min = 7,max = 100, message = "Password must contain 7 characters minimum or 100 maximum ")
     @Column(name = "password")
     private String password;
 

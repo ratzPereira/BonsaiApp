@@ -6,13 +6,16 @@ import com.ratz.mybonsaicorner.services.BonsaiServiceImpl;
 import com.ratz.mybonsaicorner.services.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 
 
 @RestController
+@Validated
 public class BonsaiController {
 
     @Autowired
@@ -22,7 +25,7 @@ public class BonsaiController {
     private UserServiceImpl userService;
 
     @PostMapping("/bonsai/{id}/new")
-    public ResponseEntity<Object> addNewBonsai(@PathVariable int id, @RequestBody Bonsai bonsai) {
+    public ResponseEntity<Object> addNewBonsai(@PathVariable int id, @Valid @RequestBody Bonsai bonsai) {
 
         User user = userService.findUserById(id);
         bonsai.setUser(user);
