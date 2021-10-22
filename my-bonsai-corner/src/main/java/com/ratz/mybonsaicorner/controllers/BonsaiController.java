@@ -3,6 +3,8 @@ package com.ratz.mybonsaicorner.controllers;
 import com.ratz.mybonsaicorner.entities.Bonsai;
 import com.ratz.mybonsaicorner.services.BonsaiServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,13 +19,13 @@ public class BonsaiController {
     private BonsaiServiceImpl bonsaiServiceImpl;
 
     @PostMapping("/new")
-    public Bonsai addNewBonsai(@RequestBody Bonsai bonsai) {
+    public ResponseEntity<Bonsai> addNewBonsai(@RequestBody Bonsai bonsai) {
         bonsaiServiceImpl.addBonsai(bonsai);
-        return bonsai;
+        return new ResponseEntity<>(bonsai, HttpStatus.OK) ;
     }
 
     @GetMapping("/mybonsais")
-    public List<Bonsai> findAllBonsai(){
-        return bonsaiServiceImpl.getAllBonsai();
+    public ResponseEntity<List<Bonsai>> findAllBonsai(){
+        return new ResponseEntity<>(bonsaiServiceImpl.getAllBonsai(), HttpStatus.OK) ;
     }
 }
