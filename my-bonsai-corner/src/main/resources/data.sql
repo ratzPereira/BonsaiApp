@@ -7,3 +7,5 @@ INSERT INTO bonsai (id, name, specie, date_of_creation, image, description, user
 ('7c0327a3-2d8f-48b3-9127-e48f214ba494', 'Mimosa', 'Silk Mimosa', '13-12-2200','random image', 'wow,very good',1);
 
 
+INSERT INTO intervention (id, intervention_date, images, intervention_description, intervention_status, bonsai_id) VALUES
+    (1, '2008-11-11',  'ola', 'ta tudo descriton', 1, '9c0327a3-2d8f-48b3-9227-e48f214ba494');

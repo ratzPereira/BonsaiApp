@@ -6,6 +6,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -40,17 +42,29 @@ public class Bonsai {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @OneToMany(mappedBy = "bonsai", cascade = CascadeType.ALL)
+    private List<Intervention> interventionList = new ArrayList<>();
+
 
     public Bonsai() {
     }
 
-    public Bonsai(String name, String specie, String dateOfCreation, String image, String description, User user) {
+    public Bonsai(String name, String specie, String dateOfCreation, String image, String description, User user, List<Intervention> interventionList) {
         this.name = name;
         this.specie = specie;
         this.dateOfCreation = dateOfCreation;
         this.image = image;
         this.description = description;
         this.user = user;
+        this.interventionList = interventionList;
+    }
+
+    public List<Intervention> getInterventionList() {
+        return interventionList;
+    }
+
+    public void setInterventionList(List<Intervention> interventionList) {
+        this.interventionList = interventionList;
     }
 
     public String getId() {
