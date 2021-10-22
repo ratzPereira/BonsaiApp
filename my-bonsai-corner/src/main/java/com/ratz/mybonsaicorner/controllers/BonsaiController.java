@@ -1,16 +1,16 @@
 package com.ratz.mybonsaicorner.controllers;
 
 import com.ratz.mybonsaicorner.entities.Bonsai;
+import com.ratz.mybonsaicorner.entities.User;
 import com.ratz.mybonsaicorner.services.BonsaiServiceImpl;
+import com.ratz.mybonsaicorner.services.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.util.List;
+import java.net.URI;
+
 
 @RestController
 public class BonsaiController {
@@ -18,14 +18,18 @@ public class BonsaiController {
     @Autowired
     private BonsaiServiceImpl bonsaiServiceImpl;
 
-    @PostMapping("/new")
-    public ResponseEntity<Bonsai> addNewBonsai(@RequestBody Bonsai bonsai) {
-        bonsaiServiceImpl.addBonsai(bonsai);
-        return new ResponseEntity<>(bonsai, HttpStatus.OK) ;
-    }
+    @Autowired
+    private UserServiceImpl userService;
 
-    @GetMapping("/mybonsais")
-    public ResponseEntity<List<Bonsai>> findAllBonsai(){
-        return new ResponseEntity<>(bonsaiServiceImpl.getAllBonsai(), HttpStatus.OK) ;
+    @PostMapping("/bonsai/{id}/new")
+    public ResponseEntity<Object> addNewBonsai(@PathVariable int id, @RequestBody Bonsai bonsai) {
+
+        User user = userService.findUserById(id);
+        bonsai.setUser(user);
+        bonsaiServiceImpl.addBonsai(bonsai);
+        URI location = ServletUriComponentsBuilder.fromUriString("http://localhost:8080/bonsais").path("/{id}").buildAndExpand(bonsai.getId())
+                .toUri();
+
+        return ResponseEntity.created(location).build();
     }
 }

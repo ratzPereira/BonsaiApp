@@ -34,6 +34,17 @@ public class Bonsai {
     private User user;
 
 
+    public Bonsai() {
+    }
+
+    public Bonsai(String name, String specie, String dateOfCreation, String image, String description, User user) {
+        this.name = name;
+        this.specie = specie;
+        this.dateOfCreation = dateOfCreation;
+        this.image = image;
+        this.description = description;
+        this.user = user;
+    }
 
     public String getId() {
         return id;
@@ -89,5 +100,18 @@ public class Bonsai {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    @Override
+    public String toString() {
+        return "Bonsai{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", specie='" + specie + '\'' +
+                ", dateOfCreation='" + dateOfCreation + '\'' +
+                ", image='" + image + '\'' +
+                ", description='" + description + '\'' +
+                ", user=" + user +
+                '}';
     }
 }
