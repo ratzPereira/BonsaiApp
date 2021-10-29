@@ -1,5 +1,7 @@
 package com.ratz.mybonsaicorner.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
@@ -33,6 +35,7 @@ public class User {
 
     @Size(min = 7,max = 100, message = "Password must contain 7 characters minimum or 100 maximum ")
     @Column(name = "password")
+    @JsonIgnore
     private String password;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
